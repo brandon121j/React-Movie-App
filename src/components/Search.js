@@ -7,6 +7,7 @@ class Search extends Component {
 
 	state = {
         isError: false,
+        errorMessage: "",
         isLoading: false,
         movieSearch: "",
         title: "",
@@ -19,9 +20,14 @@ class Search extends Component {
         language: "",
         country: "",
         awards: "",
-        poster: ""
+        poster: "",
+        initialSearch: "Shrek"
     }
 
+
+    async componentDidMount() {
+        this.fetchMovies(this.state.initialSearch)
+    }
 
     fetchMovies = async(movieSearch) => {
 
@@ -31,11 +37,33 @@ class Search extends Component {
 
         try {
             let result = await axios.get(`https://www.omdbapi.com/?apikey=efbef9a0&t=${movieSearch}`);
-            console.log(result)
+            this.setState({
+                movieSearch: result.data.movieSearch,
+                title: result.data.title,
+                year: result.data.year,
+                rated: result.data.rated,
+                genre: result.data.genre,
+                director: result.data.director,
+                writer: result.data.writer,
+                plot: result.data.plot,
+                language: result.data.language,
+                country: result.data.country,
+                awards: result.data.awards,
+                poster: result.data.poster,
+                isError: false,
+                isLoading: false
+            })
         
         
         } catch(error) {
-
+            console.log(error.response);
+            if (error && error.response === 404) {
+                this.setState({
+					isError: true,
+					errorMessage: error.response.data,
+					isLoading: false,
+				});
+            }
         }
     }
 
@@ -54,9 +82,14 @@ class Search extends Component {
 		return (
             <div className="app">
                 <form>
-                    <input type="text" onChange={this.onChangeHandler} name="movieSearch" value={this.state.movieSearch}/>
+                    <input name="movieSearch" value={this.state.movieSearch} onChange={this.onChangeHandler}/>
                     <button onClick={this.onSubmitHandler}>Search</button>
                 </form>
+                <div>
+                        {this.state.isError && (
+                            <span style={{ color: "red" }}>{this.state.errorMessage}</span>
+                        )}
+                    </div>
                 <div>
                     {this.state.isLoading ? (<Loading/>) : (
                         <MovieDetail

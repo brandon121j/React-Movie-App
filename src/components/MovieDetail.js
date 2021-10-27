@@ -17,8 +17,8 @@ function movieDetail({
     
     return(
 
-        <div>
-            <div>
+        <div className="movieDetailsContainer">
+            <div className="listedMovieDetails">
                 <h1>Title: {title} ({year})</h1>
                 <img src={poster} alt=""/>
                 <p>Plot: {plot}</p>
@@ -28,7 +28,24 @@ function movieDetail({
                 <p>Writer: {writer}</p>
                 <p>Language: {language}</p>
                 <p>Country: {country}</p>
+                <p>Awards: {awards}</p>
             </div>
         </div>
     )
 }
+
+movieDetail.propTypes = {
+    title: propTypes.string.isRequired,
+    year: propTypes.string.isRequired,
+    rated: propTypes.string.isRequired,
+    genre: propTypes.string.isRequired,
+    director: propTypes.string.isRequired,
+    writer: propTypes.string.isRequired,
+    plot: propTypes.string.isRequired,
+    language: propTypes.string.isRequired,
+    country: propTypes.string.isRequired,
+    awards: propTypes.string.isRequired,
+    poster: propTypes.string.isRequired
+}
+
+export default movieDetail;
