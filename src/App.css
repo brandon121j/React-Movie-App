@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+
+form {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+button {
+  padding: 10px;
+  width: 100px
+}
+
+input {
+  width: 250px;
+  font-size: 20px;
+}
+
+input:focus {
+  outline: none
+}
