@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import Search from './components/Search';
 import './App.css';
 
-
 // only one random title
 
 export class App extends Component {
-
 	render() {
 		return (
 			<div className="App">
-        <Search />
+				<Search />
 			</div>
 		);
 	}
