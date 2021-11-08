@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import MovieDetail from './MovieDetail';
+// import MovieDetail from './MovieDetail';
 import Loading from './Loading';
 
 const Search = () => {
 	const [movies, setMovies] = useState([]);
+	const [typedSearch, setTypedSearch] = useState('');
 	const [movieSearch, setMovieSearch] = useState('');
 
 	useEffect(async () => {
-		fetchMovies();
-	}, []);
+		fetchMovies(movieSearch);
+	}, [movieSearch]);
 
-	async function fetchMovies(searchedMovie) {
-		console.log(movieSearch)
+	async function fetchMovies(search) {
 		try {
+			// Map through with another array with movie id, 
 			let result = await axios.get(
-				`https://www.omdbapi.com/?apikey=efbef9a0&s=${searchedMovie}`
+				`https://www.omdbapi.com/?apikey=efbef9a0&s=${search}`
 			);
-			console.log(result)
+			// console.log(result)
 			setMovies(result.data.Search);
 			console.log(movies)
+
 		} catch (e) {
 			console.log(e.response);
 			// if (e && e.response.status === 404) {
@@ -33,25 +35,30 @@ const Search = () => {
 	};
 
 	const onInputHandler = (e) => {
-		setMovieSearch(e.target.value);
+		setTypedSearch(e.target.value);
 	}
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		fetchMovies(movieSearch)
+	const onClickHandler = () => {
+		setMovieSearch(typedSearch)
 	}
 
 	return (
 		<div className="app">
-			<form onSubmit={onSubmit}>
 				<input
 					name="movieSearch"
 					onInput={onInputHandler}
 				/>
-				<button type='submit'>Search</button>
-			</form>
+				<button onClick={onClickHandler}>Search</button>
 			<div>
-		
+				{
+					movies.map((item) => {
+						return (
+							<div>
+								<h3>{item}</h3>
+							</div>
+						)
+					})
+				}
 			</div>
 			<div>
 			</div>
