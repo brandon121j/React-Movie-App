@@ -3,14 +3,25 @@ import axios from 'axios';
 // import MovieDetail from './MovieDetail';
 import Loading from './Loading';
 require('dotenv').config();
+const api = process.env.REACT_APP_API_KEY;
 
 
 const Search = () => {
-	
+	const [search, setSearch] = useState('');
+
+	const onInputHandler = (e) => {
+		setSearch(e.target.value)
+	}
+
+	const onClickHandler = async () => {
+
+		let result = await axios.get(
+			`https://www.omdbapi.com/?apikey=${api}&s=${search}&type=movie`
+		);
+	}
 
 	return (
-		<div className="app">
-
+		<div className="SearchContainer">
 		</div>
 	);
 };
