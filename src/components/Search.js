@@ -4,6 +4,7 @@ import axios from 'axios';
 import Loading from './Loading';
 require('dotenv').config();
 
+
 const Search = () => {
 	const [movies, setMovies] = useState([]);
 	const [typedSearch, setTypedSearch] = useState('');
@@ -19,8 +20,9 @@ const Search = () => {
 	async function fetchMovies(search) {
 		try {
 			// Map through with another array with movie id, 
+			console.log(api)
 			let result = await axios.get(
-				`https://www.omdbapi.com/?apikey=${api}=${startingSearch[random]}`
+				`https://www.omdbapi.com/?apikey=${api}&s=${startingSearch[random]}`
 			);
 			// console.log(result)
 			setMovies(result.data.Search);
