@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import MovieDetail from './MovieDetail';
 import Loading from './Loading';
+require('dotenv').config();
 
 const Search = () => {
 	const [movies, setMovies] = useState([]);
 	const [typedSearch, setTypedSearch] = useState('');
 	const [movieSearch, setMovieSearch] = useState('');
+	const startingSearch = ['Superman', 'lord of the ring', 'batman', 'Pokemon', 'Harry Potter', 'Star Wars', 'Avengers', 'Terminator'];
+	const random = Math.floor(Math.random() * startingSearch.length);
+	const api = process.env.API_KEY
 
 	useEffect(async () => {
 		fetchMovies(movieSearch);
@@ -16,7 +20,7 @@ const Search = () => {
 		try {
 			// Map through with another array with movie id, 
 			let result = await axios.get(
-				`https://www.omdbapi.com/?apikey=efbef9a0&s=${search}`
+				`https://www.omdbapi.com/?apikey=${api}=${startingSearch[random]}`
 			);
 			// console.log(result)
 			setMovies(result.data.Search);
