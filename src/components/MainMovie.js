@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loading from './Loading';
 require('dotenv').config();
 
-function HomePage() {
+function MainMovie() {
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [search, setSearch] = useState('');
@@ -125,4 +125,4 @@ function HomePage() {
 	);
 }
 
-export default HomePage;
+export default MainMovie;
