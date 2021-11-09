@@ -6,7 +6,7 @@ require('dotenv').config();
 const api = process.env.REACT_APP_API_KEY;
 
 
-const SingleMovie = () => {
+const MainMovieDetail = () => {
 	const [search, setSearch] = useState('');
 
 	const onInputHandler = (e) => {
@@ -26,6 +26,6 @@ const SingleMovie = () => {
 	);
 };
 
-export default SingleMovie;
+export default MainMovieDetail;
 
 // efbef9a0

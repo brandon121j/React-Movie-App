@@ -2,7 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import React, { Component } from 'react';
 import './App.css';
 import MainMovie from './components/MainMovie';
-import SingleMovie from './components/SingleMovie';
+import MainMovieDetail from './components/MainMovieDetail';
 
 // only one random title
 
@@ -12,7 +12,7 @@ export class App extends Component {
 			<div className="App">
 				<BrowserRouter>
 						<MainMovie path="/" />
-						<SingleMovie path="/fetch-movie/:movie" />
+						<MainMovieDetail path="/fetch-movie/:movie" />
 				</BrowserRouter>
 			</div>
 		);

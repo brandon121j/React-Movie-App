@@ -47,7 +47,7 @@ function MainMovie() {
 					console.log(result);
 					setMovies(result);
 					setLoading(false);
-                    setError('');
+					setError('');
 				})
 				.catch((e) => {
 					console.log(e);
@@ -81,26 +81,32 @@ function MainMovie() {
 					console.log(result);
 					setMovies(result);
 					setLoading(false);
-                    setError('');
+					setError('');
 				})
 				.catch((e) => {
 					console.log(e);
 				});
 		} catch (e) {
 			if (e.response === undefined) {
-                setError("Title not found");
-			} 
+				setError('Title not found');
+			}
 		}
 	};
 
-    const posterClicker = () => {
-        console.log('HELLO WORKING YOU CLICKED')
-    }
+	const posterClicker = () => {
+		console.log('HELLO WORKING YOU CLICKED');
+	};
+
+	const keyPressHandler = (e) => {
+		if (e.keyCode === 13) {
+			onClickHandler();
+		}
+	};
 
 	return (
 		<div className="app">
 			<div className="SearchContainer">
-				<input type="text" onInput={onInputHandler} />
+				<input type="text" onInput={onInputHandler} onKeyDown={keyPressHandler}/>
 				<button onClick={onClickHandler}>Search</button>
 			</div>
 			<div>
@@ -113,7 +119,7 @@ function MainMovie() {
 							<div className="HomePageContainer" key={item.data.imdbID}>
 								<div className="posterContainer">
 									<h3 onClick={posterClicker}>{item.data.Title}</h3>
-									<img src={item.data.Poster} onClick={posterClicker}/>
+									<img src={item.data.Poster} onClick={posterClicker} />
 									<p>{item.data.Rated}</p>
 								</div>
 							</div>
