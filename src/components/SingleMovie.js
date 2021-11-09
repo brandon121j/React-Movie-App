@@ -6,7 +6,7 @@ require('dotenv').config();
 const api = process.env.REACT_APP_API_KEY;
 
 
-const Search = () => {
+const SingleMovie = () => {
 	const [search, setSearch] = useState('');
 
 	const onInputHandler = (e) => {
@@ -26,6 +26,6 @@ const Search = () => {
 	);
 };
 
-export default Search;
+export default SingleMovie;
 
 // efbef9a0

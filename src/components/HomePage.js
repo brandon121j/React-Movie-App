@@ -7,7 +7,8 @@ require('dotenv').config();
 function HomePage() {
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(false);
-    const [search, setSearch] = useState('');
+	const [search, setSearch] = useState('');
+	const [error, setError] = useState('');
 	const startingSearch = [
 		'Superman',
 		'lord of the rings',
@@ -43,36 +44,67 @@ function HomePage() {
 
 			Promise.all(finalMovieArray)
 				.then((result) => {
-                    console.log(result)
+					console.log(result);
 					setMovies(result);
 					setLoading(false);
+                    setError('');
 				})
 				.catch((e) => {
 					console.log(e);
 				});
 		} catch (e) {
-			console.log(e);
+			setError(e.response.data);
 		}
 	}
 
-    const onInputHandler = (e) => {
-		setSearch(e.target.value)
-	}
+	const onInputHandler = (e) => {
+		setSearch(e.target.value);
+	};
 
 	const onClickHandler = async () => {
+		try {
+			setLoading(true);
+			let result = await axios.get(
+				`https://www.omdbapi.com/?apikey=${api}&s=${search}&type=movie`
+			);
 
-		let result = await axios.get(
-			`https://www.omdbapi.com/?apikey=${api}&s=${search}&type=movie`
-		);
-	}
+			let idArray = result.data.Search.map((item) => item.imdbID);
+
+			let finalMovieArray = idArray.map(async (item) => {
+				return await axios.get(
+					`https://www.omdbapi.com/?apikey=${api}&i=${item}&type=movie`
+				);
+			});
+
+			Promise.all(finalMovieArray)
+				.then((result) => {
+					console.log(result);
+					setMovies(result);
+					setLoading(false);
+                    setError('');
+				})
+				.catch((e) => {
+					console.log(e);
+				});
+		} catch (e) {
+			if (e.response === undefined) {
+                setError("Title not found");
+			} 
+		}
+	};
+
+    const posterClicker = () => {
+        console.log('HELLO WORKING YOU CLICKED')
+    }
 
 	return (
 		<div className="app">
 			<div className="SearchContainer">
 				<input type="text" onInput={onInputHandler} />
-				<button>Search</button>
+				<button onClick={onClickHandler}>Search</button>
 			</div>
 			<div>
+				{error && error}
 				{loading ? (
 					<Loading />
 				) : (
@@ -80,8 +112,8 @@ function HomePage() {
 						return (
 							<div className="HomePageContainer" key={item.data.imdbID}>
 								<div className="posterContainer">
-									<h3>{item.data.Title}</h3>
-									<img src={item.data.Poster} />
+									<h3 onClick={posterClicker}>{item.data.Title}</h3>
+									<img src={item.data.Poster} onClick={posterClicker}/>
 									<p>{item.data.Rated}</p>
 								</div>
 							</div>
