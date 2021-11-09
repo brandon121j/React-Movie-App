@@ -13,7 +13,7 @@ export class App extends Component {
 				<Router>
 					<Switch>
 						<Route exact path="/" component={MainMovie}/>
-						<Route exact path="/fetch-movie/:movie" component={MainMovieDetail} />
+						<Route exact path="/fetch-movie/:imdbID" component={MainMovieDetail} />
 					</Switch>
 				</Router>
 			</div>
