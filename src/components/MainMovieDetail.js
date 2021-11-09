@@ -42,16 +42,18 @@ export const MainMovieDetail = () => {
 
 	return (
 	<div className="SearchContainer">
+		<div className="SearchContainerBox">
 		<h1>{title}</h1>
 		<img alt={title} src={poster}/>
-		<h3>Plot: <br/>{plot}</h3>
-		<h3>Actors: {actors}</h3>
+		<h3 id='plot'>Plot: <br/>{plot}</h3>
+		<h3>Actors: <br/>{actors}</h3>
 		<h3>Director: {director}</h3>
 		<h3>Genre: {genre}</h3>
 		<h3>Release Date: {release}</h3>
 		<Link to='/'>
-		<button style={{ cursor: "pointer"}}>Go Back</button>
+		<button style={{ cursor: 'pointer' }}>Go Back</button>
 		</Link>
+		</div>
 	</div>
 	)
 	

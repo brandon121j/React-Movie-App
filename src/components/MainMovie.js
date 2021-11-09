@@ -102,7 +102,7 @@ export function MainMovie() {
 
 	return (
 		<div className="app">
-			<div className="SearchContainer">
+			<div className="SearchMovieContainer">
 				<input
 					type="text"
 					onInput={onInputHandler}
