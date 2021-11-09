@@ -61,6 +61,7 @@ input:focus {
 .posterContainer h3{
   cursor: pointer;
   opacity: .5;
+  max-width: 300px;
 }
 
 .posterContainer h3:hover {
@@ -69,4 +70,9 @@ input:focus {
 
 .posterContainer img {
   cursor: pointer;
+}
+
+.HomePageContainer {
+  display: flex;
+  justify-content: center;
 }

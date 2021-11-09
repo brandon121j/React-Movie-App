@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import MovieDetail from './MovieDetail';
 import Loading from './Loading';
 require('dotenv').config();
 
-function MainMovie() {
+export function MainMovie() {
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [search, setSearch] = useState('');
@@ -93,10 +94,6 @@ function MainMovie() {
 		}
 	};
 
-	const posterClicker = () => {
-		console.log('HELLO WORKING YOU CLICKED');
-	};
-
 	const keyPressHandler = (e) => {
 		if (e.keyCode === 13) {
 			onClickHandler();
@@ -106,7 +103,11 @@ function MainMovie() {
 	return (
 		<div className="app">
 			<div className="SearchContainer">
-				<input type="text" onInput={onInputHandler} onKeyDown={keyPressHandler}/>
+				<input
+					type="text"
+					onInput={onInputHandler}
+					onKeyDown={keyPressHandler}
+				/>
 				<button onClick={onClickHandler}>Search</button>
 			</div>
 			<div>
@@ -118,8 +119,15 @@ function MainMovie() {
 						return (
 							<div className="HomePageContainer" key={item.data.imdbID}>
 								<div className="posterContainer">
-									<h3 onClick={posterClicker}>{item.data.Title}</h3>
-									<img src={item.data.Poster} onClick={posterClicker} />
+									<Link to={`/fetch-movie/${item.data.imdbID}`}>
+										<h3 value={item.data.imdbID}>
+											{item.data.Title}
+										</h3>
+										<img
+											src={item.data.Poster}
+											value={item.data.imdbID}
+										/>
+									</Link>
 									<p>{item.data.Rated}</p>
 								</div>
 							</div>
@@ -131,4 +139,4 @@ function MainMovie() {
 	);
 }
 
-export default MainMovie;
+// export default MainMovie;
