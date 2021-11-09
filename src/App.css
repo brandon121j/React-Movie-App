@@ -57,3 +57,16 @@ input {
 input:focus {
   outline: none
 }
+
+.posterContainer h3{
+  cursor: pointer;
+  opacity: .5;
+}
+
+.posterContainer h3:hover {
+  opacity: 1;
+}
+
+.posterContainer img {
+  cursor: pointer;
+}
