@@ -79,7 +79,7 @@ input:focus {
 .SearchContainer {
 	display: flex;
 	justify-content: center;
-  padding: 0px;
+	padding: 0px;
 }
 
 .SearchContainerBox {
@@ -87,19 +87,19 @@ input:focus {
 	justify-content: center;
 	flex-direction: column;
 	width: 500px;
-  padding-bottom: 25px;
+	padding-bottom: 25px;
 }
 
 .SearchMovieContainer {
-  display: flex;
-  justify-content: center;
-  padding: 25px;
+	display: flex;
+	justify-content: center;
+	padding: 25px;
 }
 
-.SearchMovieContainer input{
-  padding: 5px;
+.SearchMovieContainer input {
+	padding: 5px;
 }
 
-.SearchMovieContainer button:hover{
-  cursor: pointer;
+.SearchMovieContainer button:hover {
+	cursor: pointer;
 }
